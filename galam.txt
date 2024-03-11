@@ -1,0 +1,522 @@
+\documentclass{article}
+
+\usepackage{graphicx}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{amssymb} 
+\usepackage{mathtools}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{subfigure}
+\usepackage{booktabs}
+\usepackage{bbm}
+\usepackage{bm}
+\usepackage{url}
+\usepackage{appendix}
+\usepackage{subcaption}
+\usepackage{placeins}
+\usepackage{float}
+\usepackage{mathtools, nccmath}
+\title{Dynamcis of Democratic Elections Essay \\
+\textbf{Galam models}}
+\author{Matej Rojec}
+\date{January 29, 2024}
+
+\begin{document}
+
+\maketitle
+\newpage
+
+\tableofcontents
+\listoffigures
+\listoftables
+
+\newpage
+\newcommand{\p}{\mathbb P}
+\newcommand{\I}{\mathbbm{1}}
+
+\begin{abstract}
+This essay explores the Galam model and its dynamics, presenting an introduction to the fundamental model and its extensions emphasizing its potential for capturing opinion dynamics in systems influenced by impactful events and prejudices. The Galam model is analyzed in detail, considering the dynamics that govern its behavior. Extensions to the model are discussed to address its limitations and enhance its applicability. The essay further engages in a discussion of the model, exploring its relevance in real-world scenarios. Case studies, including the Trump 2016 election and global warming opinion dynamics, are examined to illustrate the model's utility. The conclusion offers a final discussion on the Galam model, its comparison to the models introduced in the lectures and its criticisms. 
+\end{abstract}
+
+\section{Introduction}
+
+
+The Galam models are a series of models of sociophysics introduced by Serge Galam in the last 25 years. The models are divided into different classes, which deal respectively with democratic voting in bottom-up hierarchical systems, decision making and opinion dynamics. These models have been used to predict several major real political events, including the victory of the French extreme right party in the 2000 first round of French presidential elections, the voting at fifty-fifty in several democratic countries (Germany, Italy, Mexico), the victory of the no to the 2005 French referendum on the European constitution and the 2016 United States presidential election. The models have also produced numerous novel and counterintuitive results with respect to the associated social and political framework.
+
+In 2016, Galam published a paper explaining Donald Trump’s unexpected victory in that year’s US Republican primary election. We will take a closer look at his approach and reasoning for this conclusion in chapter \ref{ch:trump}. His model also suggested that Trump could win the November presidential election – a view not then supported by analysts or polls. The Galam model is based on the idea of critical thresholds or tipping points in public opinion. Galam is convinced that the dynamics of opinions obey discoverable universal quantitative laws and can be modeled in the same way that scientists model the physical world.
+
+However, it is important to note that the Galam model is just one of many models that have been developed to predict political outcomes. The outcome of the 2016 United States presidential election was determined by a variety of factors, including voter turnout, the electoral college system, and the distribution of votes across different states. While the Galam model may have been able to predict Trump’s victory in the 2016 Republican primary that does not mean it is a perfect model.
+
+\section{Galam models}
+
+As stated before the Galam model is based on opinion dynamics, that has been crafted over three decades within the realm of sociophysics. Referred to interchangeably as the Local Majority Rule (LMR), Majority Rule (MJ), Sequential Majority Rule (SMR), or the Galam model, this framework encapsulates three pivotal principles elaborated upon in the subsequent section.
+
+The key idea of the Galam model is threshold dynamics. Firstly we will take a look at the case where we are given two opinions $A$ and $B$ with $N$ homogeneous agents and a starting support for opinion $A$ of $p_0 \in [0,1]$. Let us now take a closer look at the Galam model.
+
+
+\subsection{Galam model}
+\label{ch:gl1}
+
+The Galam model operates through a sequence of three key consecutive steps, iteratively repeated multiple times in succession.
+
+\begin{enumerate}
+
+\item 
+In the initial step, agents are randomly distributed into various groups, each consisting of small sizes ranging from 1 up to a specified upper limit, typically set at 5 or 6.
+
+\item 
+The next step involves implementing a local majority rule within each individual group. This updates the choices of all agents along the option that has the majority of votes. In the case of a tie in an even-sized group, updates occur along opinion $A$ with a probability denoted as $k$, while the opinion $B$ is updated with a probability of $(1 - k)$. The current value of $k$ is contingent on the prevailing prejudices and beliefs within the associated social group.
+
+\item 
+The final step reshuffles all agents, prompting a restart from the initial step.
+
+\end{enumerate}
+
+The sequence of these three steps is called a debate. Each of the three steps unfolds in real time. The duration of each debate is influenced by the intensity of the ongoing discussion and it might vary.
+In scenarios involving the competition between two opinions, denoted as $A$ and $B$, with initial supports $p_0$ and $(1 - p_0)$ respectively, a debate, transforms $p_0$ into a new support value $p_1$. After $n$ debates we are left with $p_n$.
+
+The debates continue until the specified terminal time $T$, where the duration of the debates is taken into account in scaling $T$. One approach to determining $T$ involves leveraging a set of polls and considering the campaign duration from its initiation until the actual voting.
+
+During the voting phase, the key factor for candidate $A$ to secure victory is to attain a probability $p_T$ greater than $\frac{1}{2}$. Conversely, for candidate $B$ to win, it means that the probability $p_n$ has to be less than $\frac{1}{2}$.
+
+To quantitatively assess the successive changes in the respective supports for $A$ and $B$, $p_n$ is calculated from $p_{n-1}$ as:
+\begin{equation}
+p_n := \sum_{i=1}^{L} a_r \p_r(p_{n-1}),
+\label{eq:gl1}    
+\end{equation}
+where $L\in \mathbb{N}$ is the largest size of a group, usually set to 5 or 6, $a_r \in [0,1]$ represents the proportion of groups of size $r$, ensuring that $\sum_{i=1}^L a_r = 1$, and $\p_r$ is the probability that the group consisting of $r$ agents is updated along choice $A$.
+
+The probability $\p_r$ exhibits variation based on whether $r$ is an odd or even number. Let's initially focus on the scenario where $r$ is an odd number. For the agents to align with choice $A$, at least $\frac{r+1}{2}$ agents must hold opinion $A$. Since the number of agents favoring option $A$ follows a binomial distribution Bin$(r,p_0)$, the probability $\p_r$ is computed as follows:
+\begin{equation}
+\p_r(p_{n-1}) = \sum_{m=\frac{r+1}{2}}^r \binom{r}{m} p_{n-1}^m (1-p_{n-1})^{r-m}.
+\label{eq:gl2}
+\end{equation}
+
+
+Upon substituting the value of $r=3$ into the Equation 
+\eqref{eq:gl2}, we obtain the following expression:
+\begin{equation*}
+\p_3(p_{n-1}) =   p_{n-1}^3 + 3 p_{n-1}^2 (1-p_{n-1}),
+\end{equation*}
+that accounts for opinions (local majorities) $(3A, 0B)$ and $(2A, 1B)$. 
+
+Now, let's consider the scenario where $r$ is an even number. For the agents to align with choice  $A$, a minimum of $\frac{r}{2} + 1$ agents must support opinion A, ensuring a majority vote. Alternatively, there could be a tie with $\frac{r}{2}$ agents favoring option $A$, and in this case, the tie is resolved in favor of $A$ with probability $k$. The probability $\p_r$ can be thus expressed as follows:
+
+\begin{equation}
+\p_r(p_{n-1}) = \sum_{m=\frac{r}{2} + 1}^r \binom{r}{m} p_{n-1}^m (1-p_{n-1})^{r-m} + k\cdot \binom{r}{\frac{r}{2}} p_{n-1}^\frac{r}{2} (1-p_{n-1})^\frac{r}{2}.
+\label{eq:gl3}
+\end{equation}
+
+If we substitute $r=4$ into Equation \eqref{eq:gl3} we get:
+\begin{equation}
+\p_4(p_{n-1}) = p_{n-1}^4 + 4 p_{n-1}^3 (1-p_{n-1})^3 + 6 p_{n-1}^2 (1-p_{n-1})^2,
+\label{eq:gl100}
+\end{equation}
+that takes into consideration local majorities $(4A, 0B)$ and $(3A, 1B)$ and a tie $(2A, 2B)$.
+
+To gain deeper insights into the intricacies of Equations \eqref{eq:gl2} and \eqref{eq:gl3}, let us examine the values presented in the tables below. Specifically, Tables \ref{tab:gl1}, \ref{tab:gl2}, and \ref{tab:gl3} provide a comprehensive overview of the probabilities, $\p_r(p_{n-1})$, for different scenarios. These scenarios encompass varying values of $r$ (2, 3, 4, 5, 6), specific probabilities denoted by $p_{n-1}$ (0.1, 0.3, 0.5, 0.7, 0.9), and the influence of $k$ (0, 0.5, 1) as demonstrated in the preceding tables. 
+
+From the tables, it can be observed that for odd numbers of $r$, if $p_{n-1} > 0.5$, then $p_n > p_{n-1}$, and if $p_{n-1} < 0.5$, then $p_n < p_{n-1}$. This phenomenon arises due to the nature of the binomial distribution. Conversely, the scenario differs for even values of $r$. Consider the case when $k=1$ and $r=2$: if $p_{n-1} = 0.3 < 0.5$, then $p_n = 0.51 > p_{n-1}$. In this instance, the inequality is influenced by the value of $k$, introducing an additional factor into the probability transition dynamics.
+
+
+
+\begin{table}[ht!]
+\centering
+\begin{tabular}{|c|ccccc|} \hline
+$p_{n-1}$ & $r=2$ & $r=3$ & $r=4$ & $r=5$ & $r=6$ \\
+\hline
+0.1 & 0.01 & 0.028 & 0.0037 & 0.0086 & 0.0013 \\
+0.3 & 0.09 & 0.216 & 0.0837 & 0.1631 & 0.0705 \\
+0.5 & 0.25 & 0.500 & 0.3125 & 0.5000 & 0.3438 \\
+0.7 & 0.49 & 0.784 & 0.6517 & 0.8369 & 0.7443 \\
+0.9 & 0.81 & 0.972 & 0.9477 & 0.9914 & 0.9841 \\
+\hline
+\end{tabular}
+\caption{Transition probabilities $p_n$ for different numbers of $r$ and $p_{n-1}$ with $k=0$.}
+\label{tab:gl1}
+\end{table}
+
+\begin{table}[ht!]
+\centering
+\begin{tabular}{|c|ccccc|}  \hline
+$p_{n-1}$ & $r=2$ & $r=3$ & $r=4$ & $r=5$ & $r=6$ \\
+\hline
+0.1 & 0.1 & 0.028 & 0.028 & 0.0086 & 0.0086 \\
+0.3 & 0.3 & 0.216 & 0.216 & 0.1631 & 0.1631 \\
+0.5 & 0.5 & 0.500 & 0.500 & 0.5000 & 0.5000 \\
+0.7 & 0.7 & 0.784 & 0.784 & 0.8369 & 0.8369 \\
+0.9 & 0.9 & 0.972 & 0.972 & 0.9914 & 0.9914 \\
+\hline
+\end{tabular}
+\caption{Transition probabilities $p_n$ for different numbers of $r$ and $p_{n-1}$ with $k=0.5$.}
+\label{tab:gl2}
+\end{table}
+
+\begin{table}[ht!]
+\centering
+\begin{tabular}{|c|ccccc|} \hline
+$p_{n-1}$ & $r=2$ & $r=3$ & $r=4$ & $r=5$ & $r=6$ \\
+\hline
+0.1 & 0.19 & 0.028 & 0.0523 & 0.0086 & 0.0159 \\
+0.3 & 0.51 & 0.216 & 0.3483 & 0.1631 & 0.2557 \\
+0.5 & 0.75 & 0.500 & 0.6875 & 0.5000 & 0.6562 \\
+0.7 & 0.91 & 0.784 & 0.9163 & 0.8369 & 0.9295 \\
+0.9 & 0.99 & 0.972 & 0.9963 & 0.9914 & 0.9987 \\
+\hline
+\end{tabular}
+\caption{Transition probabilities $p_n$ for different numbers of $r$ and $p_{n-1}$ with $k=1$.}
+\label{tab:gl3}
+\end{table}
+
+
+\begin{figure}[ht!]
+    \centering
+    \subfigure[Current probability $p_n$ as a function of previous probability $p_{n-1}$ for $k = 1$ and $r = 3$, over the range $p_{n-1} \in (0, 1)$.]{
+        \includegraphics[width=0.7\textwidth]{Plots/r3.png}
+        \label{fig:r3}
+    }
+    \subfigure[Current probability $p_n$ as a function of previous probability $p_{n-1}$ for $k = 1$ and $r = 4$, over the range $p_{n-1} \in (0, 1)$.]{
+        \includegraphics[width=0.7\textwidth]{Plots/r4.png}
+        \label{fig:r4}
+    }
+    \caption{Current probability $p_n$ as a function of previous probability $p_{n-1}$ for different values of $r$ with $k = 1$.}
+    \label{fig:r3r4}
+\end{figure}
+
+Additionally, it is worth noting from Figure \ref{fig:r3r4} that Equations \eqref{eq:gl3} and \eqref{eq:gl100} as functions of $p_{n-1}$ exhibit three fixed points, i.e. solotions to the Equation $p_n = p_{n-1}$. Two of these points, $a_A = 1$ and $a_B = 0$, remain constant across all natural numbers $r$, as evident from Equations \eqref{eq:gl2} and \eqref{eq:gl3}. For odd values of $r$, an additional fixed point is observed at $a_{c,r} = \frac{1}{2}$, a result easily derived from Equation \eqref{eq:gl2}. In the case of even values of $r$, the third fixed point, denoted as $a_{c, r, k}$, is dependent on the specific value of $k$. Notably, when $k=\frac{1}{2}$, this value coincides with $\frac{1}{2}$; otherwise, Equation $\eqref{eq:gl3}$ may not have an analytical solution. For instance, when $r=4$, the analytical solution is expressed as follows:
+
+\begin{equation}
+a_{c, r, k} = \frac{1-6k+\sqrt{13-36k+36k^2}}{6(1-2k)}.    
+\label{eq:fp5}
+\end{equation}
+
+In the case of $r=4$ with $k=1$, the calculated value for the fixed point in Figure \ref{fig:r4} is approximately $a_{c,4, 1} \approx 0.23$. 
+This bring us to the idea of tipping points in the Galam model and how they affect the elections.
+
+To grasp the unfolding dynamics and make informed predictions prior to the voting, it is essential to delve into behavior of $p_T$. Examining the dynamics of the Equation involves a closer inspection of its fixed points, denoted as instances where $p_{T} = p_{T-1}$. Note that $p_{T}$ in Equation \eqref{eq:gl1} is a polynomial of degree $L$, meaning that there are $L$ roots. For us only roots lying inside the interval [0,1] are interesting as they represent probabilities.  
+Two obvious solutions to the Equation are $a_A = 1$  and $a_B = 0$. 
+
+To gain insights into the behavior of these solutions, let us explore the function $\lambda_T$ defined as:
+
+\begin{equation}
+\lambda_T = \frac{dp_{T}(p_{T-1})}{dp_{T-1}} := \sum_{i=1}^L a_r \lambda_r(p),
+\label{eq:fp0}
+\end{equation}
+
+where $\lambda_r := \frac{d\p_{r}(p_{T-1})}{dp_{T-1}}$.
+
+For odd values of $r$, the derivation of Equation \eqref{eq:gl2} yields the expression for $\lambda_r$:
+
+\begin{equation}
+\lambda_r(p) = \sum_{m=\frac{r+1}{2}}^r \binom{r}{m} (m-rp) p^{m-1} (1-p)^{r-m-1},
+\label{eq:fp1}
+\end{equation}
+
+conversely, for even values of $r$, the derivation of Equation \eqref{eq:gl3} results in:
+
+\begin{align}
+\lambda_r(p) &= \sum_{m=\frac{r}{2} + 1}^r \binom{r}{m} (m-rp) p^{m-1} (1-p)^{r-m-1} \nonumber \\ 
+&+ k \binom{r}{\frac{r}{2}} (1-2p) p^{\frac{r}{2}-1} (1-p)^{\frac{r}{2}-1}. \label{eq:fp2}
+\end{align}
+
+Understanding the behavior of $\lambda_T$ for different $r$ values provides valuable insights into the dynamics of the system.
+
+A fixed point is deemed stable if $\lambda_T(p) < 1$ and unstable if $\lambda_T(p) > 1$. Stability in a dynamical system implies that neighboring trajectories converge towards the fixed point over time, while instability indicates trajectories diverging away from it. Evaluating $\lambda_T$ from Equation \eqref{eq:fp0} at points $a_A = 1$ and $a_B = 0$, we find that the values of \eqref{eq:fp1} and \eqref{eq:fp2} are both equal to 0 for all $r$, signifying that $\lambda_T(a_A) = \lambda_T(a_B) = 0$ and, consequently, these are stable fixed points. 
+
+
+Given that both are attractors within the system, this suggests the existence of a tipping point—namely, an unstable fixed point denoted as $a_c$ between them. Generally, finding an analytical solution for the fixed point $a_c$ proves challenging.
+
+In the specific scenario where $k$ equals $\frac{1}{2}$, it has been previously observed that $a_c = \frac{1}{2}$ serves as a fixed point for Equations \eqref{eq:gl2} and \eqref{eq:gl3}, and consequently for Equations \eqref{eq:gl1} as well. In this instance, it can be demonstrated that $\lambda_r(a_c) > 1,$ indicating its instability.
+
+\subsection{Dynamics of the Galam model}
+\label{ch:dynm}
+
+To gain a deeper insight into the dynamics of the Galam model, let's examine a few illustrative examples. First, consider the scenario where $a_4 = 1$, indicating that $L = 4$, while $a_1=a_2=a_3 = 0$. In this particular case, we can analytically express the tipping point, as indicated by Equation \eqref{eq:fp5}. To comprehend the intricacies of this Equation, we can refer to Figure \ref{fig:a4}.
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=1.2\textwidth]{Plots/a4.png}
+    \caption{Dynamics of the Galam model with $a_4 =1$.}
+    \label{fig:a4}
+\end{figure}
+
+
+In this instance, the tipping point is a function of $k$ within the range of [0,1]. The green arrows depict the inclination towards opinion $A$ after the discussion, while the blue arrows represent the inclination towards opinion $B$. Notably, the Figure illustrates that for $k \in (0.5, 1)$, there exists a region where an initial minority of opinion A undergoes a transformation into a majority, facilitated by the influence of the probability term $k$. On the flip side, when $k$ resides in the range of (0, 0.5), a notable phenomenon unfolds—a specific region emerges where a local majority holding opinions in favor of A undergoes a shift into a minority, all attributable to the influence of $k$. This observation underscores the intricate dynamics at play within the Galam model.
+
+In a more ``realistic'' scenario, we consider six uniform groups, denoted as $L=6$, with equal probabilities for each group, i.e., $a_1 = a_2 = a_3 = a_4 = a_5 = a_6 = \frac{1}{6}$. Additionally, we examine a case with five uniform groups, where $L=5$ and $a_1 = a_2 = a_3 = a_4 = a_5 = \frac{1}{5}$. The tipping points for various $k$ values in these two scenarios are illustrated in Figure \ref{fig:a515616}. Figures \ref{fig:a515} and \ref{fig:a616} display similar patterns with slight distinctions.
+
+Let $a_{c, \text{Uniform}(l), k}$ denote the tipping point at probability $k$ for $l$ uniform groups. Upon a meticulous examination of the Figures, a discernible trend emerges: $a_{c, \text{Uniform}(5), k} > a_{c, \text{Uniform}(6), k}$ for $k\in [0, \frac{1}{2})$ and $a_{c, \text{Uniform}(5), k} < a_{c, \text{Uniform}(6), k}$ for $k\in (\frac{1}{2}, 1]$. This observation aligns with expectations, as intuitively, the presence of an additional group introduces more factors influencing the success or failure of a discussion, contingent on the value of $k$.
+
+\begin{figure}[ht!]
+    \centering
+    \subfigure[Tipping points of the Galam model with five uniform groups for different values of $k$.]{
+        \includegraphics[width=0.9\textwidth]{Plots/a515.png}
+        \label{fig:a515}
+    }
+    \subfigure[Tipping points of the Galam model with six uniform groups for different values of $k$.]{
+        \includegraphics[width=0.9\textwidth]{Plots/a616.png}
+        \label{fig:a616}
+    }
+    \caption{Tipping points of the Galam model with uniform groups.}
+    \label{fig:a515616}
+\end{figure}
+
+In both scenarios, we observe large values for $a_{c, \text{Uniform}6, 0}$ and $a_{c, \text{Uniform}5, 0}$. This indicates that for Opinion $A$ to dominate the public debate and secure over fifty percent support in the election, it must initiate with a minimum backing of approximately $0.7$ in both instances. Conversely, for Opinion $B$ to prevail, it needs to commence with an initial support of about $0.3$. This significant disparity in starting support gives Opinion $B$ a considerable advantage and all but assures victory in the election. Notably, for $k = 1$, the opposite holds true.
+
+It follows that an opinion that begins with strong support from individuals is predisposed to lose that backing swiftly upon entering the debate arena, especially if it clashes with prevailing biases and beliefs. The contradiction between the choice and the prevalent prejudices can swiftly transform a substantial majority into a minority. This dynamic is exemplified further by the following example.
+
+Let's delve into the intricacies of discussion dynamics with 5 uniform groups. Let us assume an initial support of $p_0 = 0.7$ and an initial $k = 0$. In this scenario, the tipping point is $a_{c, \text{Uniform}5, 0} \approx 0.72$. Consequently, transition probabilities will gradually decrease towards 0, since $a_{c, \text{Uniform}5, 0}$ is an unstable fixed point, and $0.7 < 0.72$.
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=1.2\textwidth]{Plots/p0.png}
+    \caption{The influence of $k$ in the case of $L=5$ and five uniform groups.}
+    \label{fig:a4444}
+\end{figure}
+
+After 8 discussions, the support value $p_8$ diminishes to approximately 0.45, making the initial majority transition into a minority. At this juncture, a profound statement is made, leading to a further decline in the support value to $p_9 = 0.3$ in step 9, coupled with a change in $k$ to 1. The tipping point undergoes a shift to $a_{c, \text{Uniform}5, 1} \approx 0.28$. With $0.3 > 0.28$, the transition probabilities ascend towards 1, steering the initial minority with a support of $0.3$ towards a gradual convergence to a probability of one. This series of events is illustrated in Figure \ref{fig:a4444}. A takeaway from this example is that changing the value of $k$ makes a public debate winning strategy.
+
+
+\newpage
+
+\section{Extensions of the model}
+
+The Galam model, introduced in Chapter \ref{ch:gl1}, provides a foundational understanding, albeit in a straightforward manner. It effectively illustrates how external influences and radical statements can significantly impact the opinions of the masses.
+
+To enhance the model's realism, we propose two key, yet simple, modifications. In the extended model, we introduce a differentiation among various types of agents.
+
+Within this extended model, three distinct types of agents emerge:
+
+\begin{enumerate}
+    \item \textbf{Floaters:} These agents determine the local majority and, subsequently, those holding the minority opinion shift to adopt the majority opinion. In the event of a tie, they adopt opinion $A$ with a probability of $k$ and opinion $B$ with a probability of $1-k$.
+    
+    \item \textbf{Inflexible Agents or Zealots:} Like floaters, these agents contribute to determining the local majority. However, if they hold the minority choice, they steadfastly adhere to it. $A$-zealots  consistently hold opinion $A$, and $B$-zealots always hold opinion $B$. The proportions of $A$-zealots and $B$-zealots among all agents are denoted by $a$ and $b$, respectively, with $a, b \in$ [0,1].
+    
+    \item \textbf{Contrarians:} These agents, initially floaters, independently decide to oppose the group majority they contributed to once the groups are dismantled. The proportion of contrarians among floaters is represented by $c$, where $c \in [0,1]$, and the sum of $a+b+c$ falls within the range [0,1]. In the special case where $c>\frac{1}{2}$, this signifies a scenario where a majority of floaters systematically shift to the opposing opinion, creating an ongoing alternative shift between opinions $A$ and $B$.
+\end{enumerate}
+
+
+The incorporation of these three agents enhances the model's realism.  
+
+The updated Equations can be computed as follows:
+\begin{align}
+P_{a,b,c,j}^{(r)}(p) &= 
+(1-2c)[\pi_0^{(r)}(p,k) + 
+a [\pi_1^{(r)}(p,k)
+- b [\pi_2^{(r)}(p,k) 
+] \nonumber \\ 
+& + c (1-a-b), \label{eq:gen-update}
+\end{align}
+
+where 
+\begin{align*}
+\pi_0^{(r)}(p,k) &= \sum_{\mu=0}^{[\frac{r}{2}]} \binom{r}{\mu} K_k^{(r, \mu)} p^{r-\mu} (1-p)^\mu \\
+\pi_1^{(r)}(p,k) &= \sum_{\mu=0}^{[\frac{r}{2}]} \binom{r}{\mu} K_{1-k}^{(r, \mu)} \frac{\mu}{r \cdot p} p^{\mu} (1-p)^{r-\mu} \\
+\pi_2^{(r)}(p,k) &= \sum_{\mu=0}^{[\frac{r}{2}]} \binom{r}{\mu} K_{k}^{(r, \mu)} \frac{\mu}{r \cdot (1-p)} p^{r-\mu} (1-p)^\mu    
+\end{align*}
+
+and, 
+
+$$K_k^{(r,\mu)} = 1 + (1-k) \I_{[r =2\mu]}.$$
+
+For further clarification and derivation of the Equations, see \cite{i3}.
+
+Let's delve into the dynamics of the Equation \eqref{eq:gen-update} by exploring a few examples. To begin, we'll closely examine Figure \ref{fig:generalized_a_time_and_generalised_c}. In Figure \ref{fig:generalized_a_time}, we observe the evolution of probability concerning variable $a$. Notably, the Figure illustrates that the presence of $A$-zealots significantly influences the transition probability's evolution.
+
+In instances where the number of $A$-zealots is substantial, it is evident that opinion $A$ can secure victory in the election, even when starting with a minority opinion. As demonstrated in our example, with an initial probability of $p_0 = 0.25$, a mere 17.2\% of $A$-zealots  determines the triumph of opinion A in the elections. This emphasizes the impactful role played by the proportion of $A$-zealots in shaping electoral outcomes.
+
+In Figure \ref{fig:generalised_c}, we explore the influence of parameter $c$ on election outcomes, assuming equal values for $a$ and $b$. Notably, when the number of agents in discussion is even (as illustrated with $r=4$), the impact of $c$ becomes particularly pronounced. A higher value of $c$ in this scenario tends to shift the minority opinion, transforming it into the majority. This observation highlights the significant role that the parameter $c$ plays in shaping election dynamics under these conditions.
+
+In Chapter \ref{ch:dynm}, we delved into the impact of fixed points and their role in shaping the dynamics of elections. However, when it comes to the generalized model, the discussion becomes more intricate. Figure \ref{fig:generalized_in_a_and_generalized_a_b} illustrates that we no longer have a guaranteed presence of three fixed points within the range [0, 1].
+
+Empirical results suggest the existence of at most three fixed points in the interval [0, 1], though this assertion is yet to be formally proven. This observation is drawn from the insights provided by Figure \ref{fig:generalized_in_a} and Figure \ref{fig:generalized_a_b}. In instances where three fixed points exist, analysis reveals that the smallest value $a_B \leq 0.5$ represents a stable point, corresponding to a final state with a majority for option $B$. Similarly, a stable point with $a_A \geq 0.5$ signifies a final state with a majority for option $A$. The intermediary point $a_c \in (a_B, a_A)$ functions as an unstable point, akin to its role in the simple Galam model. 
+
+In general, depending on the parameters, we can have three possible cases:
+
+\begin{enumerate}
+    \item \textbf{Two attractors with a tipping point in between:}
+        The first case involves two attractors with a tipping point situated between them. Here, the system exhibits a dynamic where it can transition to one of the two stable states.
+    
+    \item \textbf{One attractor with a tipping point:}
+        The second scenario consists of a single attractor with the tipping point converging at critical parameter values. This convergence leads to a transition to a single-attractor dynamic.
+    
+    \item \textbf{One attractor:}
+        The third case represents a case with one fixed points and also single-attractor dynamic.
+\end{enumerate}
+
+In the case of single-attractor dynamics one opinion is assured victory, regardless of its initial level of support. These possibilities can be observed in Figures \ref{fig:generalized_in_a} and \ref{fig:generalized_a_b}, showcasing the diverse dynamics that can arise in the generalized model based on varying parameter configurations.
+
+
+\begin{figure}[H]
+    \centering
+    \subfigure[Evolution of $P_{a,0,0,-}^{(3)}$ with respect to time for $a = 0.17$ and $a = 0.172$ with fixed values of $b=c=0, r = 3$ and $p_0 = 0.25$.]{
+        \includegraphics[width=0.9\textwidth]{Plots/generalized_a_time.png}
+        \label{fig:generalized_a_time}
+    }
+    \subfigure[Evolution of $P_{0.1,0.1,c,0.6}^{(4)}$ with respect to time for $c = 0.04$ and $c = 0.05$ with fixed values of $a=b=0.1, r = 4, k=0.6$ and $p_0 = 0.25$.]{
+        \includegraphics[width=0.9\textwidth]{Plots/generalised_c.png}
+        \label{fig:generalised_c}
+    }
+    \caption{Evolution of $P_{a,b,c,k}^{(r)}$ with respect to time.}
+    \label{fig:generalized_a_time_and_generalised_c}
+\end{figure}
+
+
+\begin{figure}[H]
+    \centering
+    \subfigure[Probability Transition of $P_{a,0,0,-}^{(7)}$ for different values of $a$.]{
+        \includegraphics[width=0.9\textwidth]{Plots/generalized_in_a.png}
+        \label{fig:generalized_in_a}
+    }
+    \subfigure[Probability Transition of $P_{a,0.32,0,-}^{(7)}$ for different values of $a$ and $b= 0.34$.]{
+        \includegraphics[width=0.9\textwidth]{Plots/generalized_a_b.png}
+        \label{fig:generalized_a_b}
+    }
+    \caption{Probability Transition of $P_{a,b,c,k}^{(r)}$ with respect to the previous probability.}
+    \label{fig:generalized_in_a_and_generalized_a_b}
+\end{figure}
+
+
+\section{Case studies backed by the Galam model}
+
+The Galam model introduced in chapter \ref{ch:gl1} has been used in many real word applications, we will now take a closer look at two of these examples such as the Trump 2016 elections and the global warming discusssion. 
+
+\subsection{Trump 2016 election}
+\label{ch:trump}
+Firstly let us explore the enigma of Donald Trump's candidacy where a stark contradiction emerged against the backdrop of established political norms. Most notable arguments against Trump's election victory were:
+\begin{enumerate}
+    \item \textbf{Lack of Political Experience:} Critics argued that Donald Trump's lack of political experience was a significant drawback. They contended that the presidency requires a deep understanding of domestic and international affairs, and Trump's background as a businessman and television personality did not adequately prepare him for the complexities of the job.
+    \item \textbf{Controversial Statements:} Trump made several controversial statements during his campaign, which some people found offensive or divisive. Critics argued that these statements raised concerns about his temperament, judgment, and ability to effectively lead a diverse nation.
+    \item \textbf{Questionable Business Practices:} Opponents raised concerns about Trump's business practices, including bankruptcies and lawsuits against his companies. They argued that these issues raised questions about his financial acumen and ability to manage the economy effectively.
+\end{enumerate}
+
+However against the odds (as it may have seen at the time) Trump secured the victory in 2016. Conventional wisdom within both Republican and Democratic circles failed to grasp the peculiar dynamics at play in Trump's journey to the forefront of the political stage. Despite lacking the typical credentials deemed essential for a Republican nominee and future president, Trump managed to secure initial support. 
+
+Trump's behaviour was question by many of his Republican supporters. 
+In the beginning the prevailing sentiment painted Trump as a political bubble on the brink of swift collapse.
+A large amount of his his Republican supporters urged a strategic shift, advocating for a more dignified and experienced public image. 
+
+However, the crux of Trump's seemingly irrational strategy becomes apparent. Rather than adhering to the conventional playbook of winning over voters through strategic maneuvering, Trump opted for a frontal assault on prevalent voter values, sparking widespread indignation and, subsequently, a loss of support. At face value, this maneuver appears contradictory. 
+
+
+In essence, Trump's strategy can be modeled with the Galam model through six uniform uniform groups, assuming for simplicity that $a=b=c=0$, as illustrated in Figure \ref{fig:a4}. Trump adeptly utilized a series of statements, that gained him the countries support.
+For example two of the most notable statements that got him nominated for the Republican party were: 
+
+ \begin{enumerate}
+     \item \textbf{Temporary Muslim ban proposal:} One of the controversial proposals that attracted significant attention during Donald Trump's campaign was his call for a ``total and complete shutdown of Muslims entering the United States.'' He first made this proposal in December 2015, following the San Bernardino terrorist attack. The idea was to temporarily ban Muslims from entering the country until the government could ``figure out what is going on''. This proposal was met with both support and condemnation. Supporters believed it was a necessary measure for national security, citing concerns about potential terrorist threats.
+     \item \textbf{Border wall and illegal immigration:} During his 2016 campaign, Donald Trump pledged to construct a border wall along the U.S.-Mexico border to address illegal immigration and enhance security. This proposal, symbolizing his commitment to border control, faced criticism for its cost and effectiveness. Throughout his presidency, efforts to secure funding and legal challenges ensued. Simultaneously, Trump pursued a strict stance on illegal immigration, advocating for increased enforcement, merit-based immigration, and measures like the ``zero tolerance'' policy, which resulted in the controversial separation of families at the border. These policies were divisive, drawing support from those emphasizing national security and economic concerns while facing opposition from advocates of comprehensive immigration reform.
+ \end{enumerate}
+
+Despite these statements eliciting a marginal decrease in his public support, they effectively tapped into underlying prejudices within certain segments of the population. This activation of the prejudice contributed to an incremental rise in the parameter $k$ in the Galam model with each statement. This phenomenon can be attributed to people's inclination to defend their opinions and engage in debates when confronted with contrasting perspectives.
+
+Trump, having accumulated a significant reservoir of prejudices, strategically increased the value of $k$ to a level where his minority opinion transitioned into a high enough level. Consequently, on July 19, 2016, he clinched the official nomination as the Republican Party's presidential nominee by securing the requisite 1,237 delegates.
+
+Having secured the nomination, Trump faced the pivotal task of winning the candidacy, necessitating strategic statements that resonated with both Democrats and Republicans. While influencing only Republicans could have resulted in a $k$ around 0.5, Trump needed to shit $k$ close to 1 to secure victory in the election.
+
+To achieve this, Trump crafted statements designed to strike a chord with the American people. Some challenged longstanding norms in the U.S., while others targeted his opponent, Hillary Clinton. Particularly noteworthy were:
+
+\begin{enumerate}
+    \item \textbf{``Make America Great Again'' slogan:} Trump's campaign slogan became a powerful rallying cry, tapping into a sense of nostalgia for a perceived bygone era and a promise to restore American greatness. It resonated with voters who felt left behind by economic and social changes.
+    \item \textbf{Anti-establishment rhetoric:} Trump positioned himself as an outsider, criticizing the political establishment and promising to ``drain the swamp'' in Washington, D.C. This resonated with voters who were disillusioned with traditional politics.
+    \item \textbf{"Lock Her Up" Chant":} Trump and his supporters frequently used the slogan ``Lock Her Up'' in reference to Hillary Clinton's use of a private email server while she was Secretary of State. Trump suggested that Clinton's actions were illegal and called for her to be investigated and prosecuted. 
+\end{enumerate}
+
+These statements activated latent prejudices, contributing to Trump's victory in the electoral college with 304 votes in 2016, while Clinton garnered 227 votes. Despite winning the popular vote by over 2.8 million, Trump secured the presidency under the electoral college system. While viewed by many as a surprising upset, Trump's triumph aligns with the dynamics outlined by the Galam model.
+
+It's worth noting that had Trump's statements been more extreme, there existed the risk of falling below the tipping point, potentially leading to electoral defeat. This underscores the delicate nature of tipping points in the electoral dynamics.
+
+\subsection{Global warming opinion dynamics}
+
+
+Let's delve into the discourse surrounding global warming. The Galam model posits an intriguing explanation for the swift and unexpected shift in public sentiment during the mid-2010s. It attributes this change to doubts arising from perceived flaws in IPCC procedures, a reversal that was not anticipated in 2009. This underscores the dynamic nature of the public conversation on global warming.
+
+Over the past decade, the discussion on global warming has undergone notable transformations, delineated into three distinct periods marked by two pivotal events: the 2007 fourth IPCC report at Unesco in Paris and the 2009 Copenhagen summit. Prior to these events, climate issues had limited awareness, and anthropic carbon dioxide wasn't deemed a significant global concern despite observed temperature anomalies from 1978 to 2000. The Unesco report triggered increased media attention and public engagement, highlighting the urgent need to reduce $\text{CO}_2$ emissions.
+
+This surge in awareness garnered heightened support for the concept of man-made global warming, reaching its zenith before the Copenhagen summit. However, setbacks such as the ``climategate'' scandal, involving leaked private emails among IPCC leaders, and the Copenhagen summit's failure to enact decisive measures dealt blows to this support. Subsequent errors in the IPCC report and evolving labels for scientific opponents further contributed to a decline in public backing for man-made global warming.
+
+The study identifies shifts in the public debate through three phases: initial alarmists advocating anthropic global warming, skeptics challenging this view, and climato-skeptics adopting a more measured stance. The evolution of skeptic labels parallels changes in public support, reflecting a complex interplay between scientific assessments and public perception.
+
+The analysis suggests that the exaggeration of statements by alarmists regarding man-made responsibility played a pivotal role in gaining majority support, even though ethical concerns were raised about the means justifying the end. Skeptics faced a dilemma, as adopting alarmists' tactics might have swayed the public debate but compromised scientific rigor. The only viable options for skeptics to reverse public opinion were providing scientific proof of natural causes or challenging the legitimacy of alarmist inflexibility.
+
+
+\section{Conclusion and final discussion}
+
+In the essay we have discussed the Galam models, introduced by Serge Galam in the past 25 years focusing on decision making, and opinion dynamics in sociophysics. Noteworthy for predicting significant political events, such as the 2016 United States presidential election,  the Galam model is rooted in the concept of tipping points and public opinion dynamics. Despite its success in foreseeing specific outcomes, it is essential to recognize that the Galam model is just one among many, and political results are influenced by diverse factors beyond any single model's scope. Finally let us compare the model with some of the model discussed in the lectures.
+
+The Voter model and the Galam model differ in how agents reconsider their opinions. In the Voter model, agents reevaluate their opinions at a rate represented by $\nu,$ whereas, in the Galam model, all agents simultaneously undergo a collective reconsideration. One criticism of the Galam model is that it assumes all agents will reconsider their opinions simultaneously, which may not reflect real-world scenarios accurately.
+
+However, a notable advantage of the Galam model is its capacity for agents to consider a multitude of opinions from other agents. Specifically, each agent in the Galam model takes into account the opinions of $r-1$ other agents, leading to more realistic and nuanced changes in opinions. This stands in contrast to the Voter model, where agents only reconsider their opinions based on one other person.
+
+Similar to the Voter model, the simple Galam model exhibits two absorbing states: $a_A = 0$ and $a_B = 1$. However, the Galam model introduces a distinctive element by including a repelling state, a feature absent in the Voter model. This unique aspect adds complexity to the Galam model.
+
+The original Galam model shares a common challenge with the Voter model, as both tend to converge to a single prevailing opinion in the long run, neglecting the realistic complexity of diverse opinions coexisting. Clearly, this oversimplified outcome does not accurately represent real-world dynamics. To address this issue of converging to absorbing states ($p_A = 0$ and $p_B = 1$), modifications have been made, such as the introduction of Zaleot voters and contrarians.
+
+In contrast to the Zaleot model, the Galam model excels in capturing social interactions more realistically. Agents in the Galam model directly communicate with each other and engage with multiple other agents. The model incorporates an estimation of the external world through the parameter $k$, allowing Zaleots in the Galam model to effectively function as voters. Consequently, there is no need for a separate coefficient to represent social interaction.
+
+However, a significant challenge with the Galam model lies in appropriately modeling of $L$ and the sizes $a_j$ for $j=1,..,L$. Determining meaningful values for $a_j$ based on historical data proves elusive, given the varying sizes of discussion groups in different elections. 
+
+The model exhibits a similarity to the Island model discussed in our lectures. In the Galam model, opinion dynamics are distributed among groups of agents in each iteration, akin to how opinions are shared among islands in the Island model.
+
+Another critique of the model's assumption is that the reshuffling is carried out at random. An extension to the model could be considered, aligning with the reinforcement model concept. In this variation, groups would not be formulated entirely at random, acknowledging the higher likelihood that individuals with similar opinions might engage in conversation.
+
+While the Galam model may have its limitations, it proves valuable in capturing opinion dynamics within a system influenced by provocative statements and prejudiced opinions. In my view, it serves as a model that effectively approximates such systems. Nevertheless, there is certainly room for further expansion and refinement.
+
+
+
+
+
+\newpage
+
+\begin{thebibliography}{99}
+%   \bibitem{i1}
+%   \emph{Ground-Level Ozone (O3) Pollution}
+%   [last viewed 31.~05.~2023], can be found at 
+%   \url{https://www.azdeq.gov/ground-level-ozone-o3-pollution} 
+
+   \bibitem{i1}
+   S.~Galam, \emph{The Trump phenomenon: An explanation from
+sociophysics}, International Journal of Modern Physics B, September 2016.
+
+   \bibitem{i2}
+    S.~Galam, \emph{Stubbornness as an unfortunate key to win a public debate: an illustration from sociophysics
+}, Springer-Verlag Berlin Heidelberg, February 2015.
+
+   \bibitem{i3}
+    S.~Galam, \emph{Tipping Points in Opinion Dynamics: A Universal Formula in Five Dimensions}, CEVIPOF - Centre for Political Research, Sciences Po and CNRS, Paris, France, 2Laboratory of Physics, Kochi University of Technology, Kochi, Japan, November 2020.
+
+
+   \bibitem{i5}
+    Donald Trump presidential campaign, 2016
+     [last viewed 29.~01.~2023], can be found at \url{https://ballotpedia.org/Donald_Trump_presidential_campaign,_2016} 
+
+
+   \bibitem{i5}
+    Donald Trump presidential campaign, 2016
+     [last viewed 29.~01.~2023], can be found at \url{https://ballotpedia.org/Donald_Trump_presidential_campaign,_2016} 
+
+   \bibitem{i5}
+    Presidential election of 2016 of Donald Trump
+     [last viewed 29.~01.~2023], can be found at \url{https://millercenter.org/president/trump/campaigns-and-elections} 
+
+
+   \bibitem{i5}
+    Donald Trump Has Brought On Countless Controversies In An Unlikely Campaign
+         [last viewed 29.~01.~2023], can be found at \url{https://www.npr.org/2016/11/05/500782887/donald-trumps-road-to-election-day} 
+     
+   \bibitem{i5}
+    Donald Trump 2016 presidential campaign [last viewed 29.~01.~2023], can be found at \url{https://en.wikipedia.org/wiki/Donald_Trump_2016_presidential_campaign} 
+
+   \bibitem{i5}
+    Notes after the Lectures of Johannes Müller in the elective course Dynamcis of Democratic Elections at TUM in the academic year 2023/24. [last viewed 29.~01.~2023], can be found at 
+\url{https://www.moodle.tum.de/pluginfile.php/4837878/mod_resource/content/24/MA5619.pdf} 
+
+\end{thebibliography}
+
+
+
+
+\end{document}
+
+
+
